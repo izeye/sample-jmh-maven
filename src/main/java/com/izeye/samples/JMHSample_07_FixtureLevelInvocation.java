@@ -37,7 +37,7 @@ public class JMHSample_07_FixtureLevelInvocation {
 			this.service = Executors.newCachedThreadPool();
 		}
 
-		@TearDown
+		@TearDown(Level.Trial)
 		public void down() {
 			this.service.shutdown();
 		}
