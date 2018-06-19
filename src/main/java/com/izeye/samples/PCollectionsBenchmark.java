@@ -2,6 +2,7 @@ package com.izeye.samples;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
 
 import org.openjdk.jmh.annotations.Benchmark;
@@ -42,6 +43,15 @@ public class PCollectionsBenchmark {
 		PMap<String, String> map = HashTreePMap.empty();
 		for (int i = 0; i < this.size; i++) {
 			map = map.plus("key" + i, "value" + i);
+		}
+		return map;
+	}
+
+	@Benchmark
+	public Map<String, String> concurrentHashMap() {
+		Map<String, String> map = new ConcurrentHashMap<>();
+		for (int i = 0; i < this.size; i++) {
+			map.put("key" + i, "value" + i);
 		}
 		return map;
 	}
